@@ -8,6 +8,7 @@ import { OfferDetail } from '../app/components/OfferDetail';
 import { PaymentInfo } from './components/PaymentInfo';
 import { ImportantConsiderations } from './components/ImportantConsiderations';
 import styled from 'styled-components';
+import { UploadArea } from './components/UploadArea';
 
 const MainContainer = styled.div`
   display: flex;
@@ -51,6 +52,8 @@ export default function Home() {
           ))}
           <h2>Considerações importantes</h2>
           <ImportantConsiderations />
+          <h2>APÓS EFETUAR O PAGAMENTO</h2>
+          <UploadArea />
         </Content>
       </MainContainer>
     </>
