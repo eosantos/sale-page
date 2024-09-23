@@ -10,7 +10,6 @@ const MainContainer = styled.div`
 export default function Home() {
   return (
     <>
-      {/* <Header /> */}
       <MainContainer>
         <Sidebar />
       </MainContainer>

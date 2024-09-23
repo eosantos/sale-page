@@ -54,6 +54,18 @@ const MenuItem = styled.p`
   }
 `;
 
+const SubMenuItem = styled.p`
+  padding: 10px 30px;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
 const Menu = styled.div`
   margin-top: 20px;
 `;
@@ -71,7 +83,9 @@ const Content = styled.main`
 export const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [offers, setOffers] = useState<Offer[]>([]);
+  const [selectedOfferIndex, setSelectedOfferIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const [isSubMenuOpen, setIsSubMenuOpen] = useState(false); // Novo estado para controlar o submenu
 
   useEffect(() => {
     const getOffers = async () => {
@@ -90,12 +104,18 @@ export const Sidebar = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleSubMenuToggle = () => {
+    setIsSubMenuOpen(!isSubMenuOpen); // Alterna a visibilidade do submenu
+  };
+
+  const handleOfferSelect = (index: number) => {
+    setSelectedOfferIndex(index);
+  };
+
   return (
     <>
-      {/* Header com botão Hamburger */}
       <Header toggleSidebar={toggleSidebar} />
 
-      {/* Sidebar */}
       <SidebarContainer isOpen={isOpen}>
         <CloseButton onClick={toggleSidebar}>
           &#x2715; {/* Ícone de "X" */}
@@ -103,9 +123,21 @@ export const Sidebar = () => {
         <Menu>
           <MenuItem>Pessoal</MenuItem>
           <MenuItem>Meu Portfólio</MenuItem>
-          <MenuItem>
+          <MenuItem onClick={handleSubMenuToggle}>
             Liquidação <span>(4)</span>
           </MenuItem>
+          {isSubMenuOpen && ( // Renderiza o submenu se estiver aberto
+            <>
+              {offers.map((offer, index) => (
+                <SubMenuItem
+                  key={index}
+                  onClick={() => handleOfferSelect(index)}
+                >
+                  {offer.nome_oferta}
+                </SubMenuItem>
+              ))}
+            </>
+          )}
           <MenuItem>Meu Perfil</MenuItem>
         </Menu>
       </SidebarContainer>
@@ -113,12 +145,12 @@ export const Sidebar = () => {
       <Content>
         <h1>Você está quase lá!</h1>
         {error && <p>{error}</p>}
-        {offers.map((offer, index) => (
-          <div key={index}>
-            <OfferDetail offer={offer} />
-            <PaymentInfo offer={offer} />
-          </div>
-        ))}
+        {offers.length > 0 && (
+          <>
+            <OfferDetail offer={offers[selectedOfferIndex]} />
+            <PaymentInfo offer={offers[selectedOfferIndex]} />
+          </>
+        )}
         <h2>Considerações importantes</h2>
         <ImportantConsiderations />
         <h2>APÓS EFETUAR O PAGAMENTO</h2>

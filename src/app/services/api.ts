@@ -1,3 +1,4 @@
+// api.ts
 export interface Offer {
   nome_oferta: string;
   slogan: string;
