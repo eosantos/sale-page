@@ -6,6 +6,7 @@ import { PaymentInfo } from '../components/PaymentInfo';
 import { ImportantConsiderations } from '../components/ImportantConsiderations';
 import { UploadArea } from '../components/UploadArea';
 import { fetchOffers, Offer } from '../services/api';
+import { FaCoins, FaUser, FaArrowRightArrowLeft } from 'react-icons/fa6';
 
 const SidebarContainer = styled.div<{ isOpen: boolean }>`
   position: fixed;
@@ -16,11 +17,12 @@ const SidebarContainer = styled.div<{ isOpen: boolean }>`
       : '-250px'}; /* Controle para abrir e fechar em dispositivos menores */
   width: 250px;
   height: calc(100% - 60px); /* Altura ajustada para não cobrir o Header */
-  background-color: #007bff;
+  background-color: #eef2f5;
+  border: 1px solid #d6dadc;
   transition: left 0.3s ease;
   z-index: 1000;
   padding-top: 20px;
-  color: white;
+  color: #373737;
 
   @media (min-width: 780px) {
     left: 0; /* Sidebar sempre visível em telas maiores */
@@ -32,7 +34,7 @@ const CloseButton = styled.button`
   top: 20px;
   right: 20px;
   background-color: transparent;
-  color: white;
+  color: #373737;
   border: none;
   cursor: pointer;
   font-size: 30px;
@@ -42,27 +44,35 @@ const CloseButton = styled.button`
   }
 `;
 
-const MenuItem = styled.p`
+const MenuItem = styled.p<{ isSelected?: boolean; isDisabled?: boolean }>`
   padding: 15px;
-  font-size: 18px;
-  cursor: pointer;
-  color: white;
+  font-size: ${({ isDisabled }) => (isDisabled ? '13px' : '18px')};
+  cursor: ${({ isDisabled }) =>
+    isDisabled
+      ? 'default'
+      : 'pointer'}; /* Desabilita o cursor se for 'Pessoal' */
+  color: ${({ isSelected }) => (isSelected ? '#20651F' : '#373737')};
+  background-color: ${({ isSelected }) =>
+    isSelected ? '#CFE4D5' : 'transparent'}; /* Fundo selecionado */
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: #cfe4d5; /* Fundo ao passar o mouse */
+    color: #20651f; /* Cor do texto ao passar o mouse */
   }
 `;
 
-const SubMenuItem = styled.p`
-  padding: 10px 30px;
-  font-size: 16px;
+const SubMenuItem = styled.p<{ isSelected?: boolean }>`
+  padding: 5px 50px;
+  font-size: 12px;
   cursor: pointer;
-  color: white;
+  color: ${({ isSelected }) => (isSelected ? '#20651F' : '#373737')};
+  background-color: transparent;
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: #cfe4d5; /* Fundo ao passar o mouse */
+    color: #20651f; /* Cor do texto ao passar o mouse */
   }
 `;
 
@@ -79,7 +89,7 @@ const NotificationContainer = styled.span`
   .count {
     position: absolute;
     top: -15px;
-    left: 75px;
+    left: 65px;
     background-color: white;
     color: red;
     border-radius: 50%;
@@ -93,17 +103,17 @@ const NotificationContainer = styled.span`
     position: absolute;
     background-color: red;
     border-radius: 50%;
-    width: 8px; // Tamanho da bolinha vermelha
-    height: 8px; // Tamanho da bolinha vermelha
-    top: 3px; // Ajuste para posicionar a bolinha vermelha na parte inferior da bolinha branca
-    left: 95px; // Ajuste para centralizar a bolinha vermelha sobre a bolinha branca
+    width: 8px;
+    height: 8px;
+    top: 3px;
+    left: 85px;
     z-index: 2; // Adicionado para garantir que a bolinha vermelha fique acima
   }
 `;
 
 const Content = styled.main`
-  margin-left: 250px; /* Espaço reservado para a Sidebar */
-  padding: 80px 20px; /* Espaçamento interno para o conteúdo e evitar sobreposição do Header */
+  margin-left: 250px;
+  padding: 80px 20px;
   background-color: #f9f9f9;
 
   @media (max-width: 780px) {
@@ -117,6 +127,9 @@ export const Sidebar = () => {
   const [selectedOfferIndex, setSelectedOfferIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [isSubMenuOpen, setIsSubMenuOpen] = useState(false); // Novo estado para controlar o submenu
+  const [selectedSubMenuIndex, setSelectedSubMenuIndex] = useState<
+    number | null
+  >(null); // Índice do submenu selecionado
 
   useEffect(() => {
     const getOffers = async () => {
@@ -143,6 +156,10 @@ export const Sidebar = () => {
     setSelectedOfferIndex(index);
   };
 
+  const handleSubMenuSelect = (index: number) => {
+    setSelectedSubMenuIndex(index); // Altera o índice do submenu selecionado
+  };
+
   return (
     <>
       <Header toggleSidebar={toggleSidebar} />
@@ -152,14 +169,21 @@ export const Sidebar = () => {
           &#x2715; {/* Ícone de "X" */}
         </CloseButton>
         <Menu>
-          <MenuItem>Pessoal</MenuItem>
-          <MenuItem>Meu Portfólio</MenuItem>
-          <MenuItem onClick={handleSubMenuToggle}>
-            Liquidação
+          <MenuItem isDisabled>Pessoal</MenuItem> {/* 'Pessoal' desabilitado */}
+          <MenuItem>
+            <FaCoins style={{ marginRight: '10px' }} /> Meu Portfólio
+          </MenuItem>
+          <MenuItem
+            onClick={handleSubMenuToggle}
+            isSelected={isSubMenuOpen} // Indica se o submenu está aberto
+          >
+            <span>
+              <FaArrowRightArrowLeft style={{ marginRight: '10px' }} />
+              Liquidação
+            </span>
             <NotificationContainer>
-              <div className="outer-circle" />
-              <div className="inner-circle" />
               <span className="count">{offers.length}</span>
+              <div className="inner-circle" />
             </NotificationContainer>
           </MenuItem>
           {isSubMenuOpen && ( // Renderiza o submenu se estiver aberto
@@ -167,14 +191,20 @@ export const Sidebar = () => {
               {offers.map((offer, index) => (
                 <SubMenuItem
                   key={index}
-                  onClick={() => handleOfferSelect(index)}
+                  onClick={() => {
+                    handleOfferSelect(index);
+                    handleSubMenuSelect(index); // Muda a seleção do submenu
+                  }}
+                  isSelected={selectedSubMenuIndex === index} // Adiciona a verificação de seleção
                 >
                   {offer.nome_oferta}
                 </SubMenuItem>
               ))}
             </>
           )}
-          <MenuItem>Meu Perfil</MenuItem>
+          <MenuItem>
+            <FaUser style={{ marginRight: '10px' }} /> Meu Perfil
+          </MenuItem>
         </Menu>
       </SidebarContainer>
 
