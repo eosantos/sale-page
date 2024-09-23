@@ -1,60 +1,18 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { Header } from '../app/components/Header';
 import { Sidebar } from '../app/components/Sidebar';
-import { fetchOffers, Offer } from '../app/services/api';
-import { OfferDetail } from '../app/components/OfferDetail';
-import { PaymentInfo } from './components/PaymentInfo';
-import { ImportantConsiderations } from './components/ImportantConsiderations';
 import styled from 'styled-components';
-import { UploadArea } from './components/UploadArea';
 
 const MainContainer = styled.div`
   display: flex;
 `;
 
-const Content = styled.main`
-  flex-grow: 1;
-  padding: 20px;
-`;
-
 export default function Home() {
-  const [offers, setOffers] = useState<Offer[]>([]);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const getOffers = async () => {
-      try {
-        const data = await fetchOffers();
-        setOffers(data);
-      } catch (error) {
-        setError('Erro ao carregar ofertas');
-      }
-    };
-
-    getOffers();
-  }, []);
-
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <MainContainer>
         <Sidebar />
-        <Content>
-          <h1>Você está quase lá!</h1>
-          {error && <p>{error}</p>}
-          {offers.map((offer, index) => (
-            <div key={index}>
-              <OfferDetail offer={offer} />
-              <PaymentInfo offer={offer} />
-            </div>
-          ))}
-          <h2>Considerações importantes</h2>
-          <ImportantConsiderations />
-          <h2>APÓS EFETUAR O PAGAMENTO</h2>
-          <UploadArea />
-        </Content>
       </MainContainer>
     </>
   );
