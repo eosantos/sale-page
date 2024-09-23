@@ -107,8 +107,10 @@ export const UploadArea: React.FC = () => {
     [key: string]: number;
   }>({});
   const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [showErrorPopup, setShowErrorPopup] = useState(false);
+  const [errorPopup, setErrorPopup] = useState<{
+    isOpen: boolean;
+    message: string;
+  }>({ isOpen: false, message: '' });
 
   const handleFileSelect = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -130,16 +132,27 @@ export const UploadArea: React.FC = () => {
       const isDuplicate = uploadedFiles.some(
         (uploadedFile) => uploadedFile.file.name === file.name
       );
+
+      if (!isValidSize) {
+        setErrorPopup({
+          isOpen: true,
+          message: 'O arquivo deve ter no máximo 25MB.'
+        });
+      } else if (!isValidType) {
+        setErrorPopup({
+          isOpen: true,
+          message:
+            'Tipo de arquivo não suportado. Apenas PDF, JPEG e PNG são permitidos.'
+        });
+      } else if (isDuplicate) {
+        setErrorPopup({
+          isOpen: true,
+          message: 'Você já enviou um arquivo com esse nome.'
+        });
+      }
+
       return isValidSize && isValidType && !isDuplicate;
     });
-
-    if (validFiles.length === 0) {
-      setErrorMessage(
-        'Nenhum arquivo válido para upload. Certifique-se de que os arquivos são menores que 25MB e em formato PDF, JPEG ou PNG.'
-      );
-      setShowErrorPopup(true);
-      return;
-    }
 
     const newFiles = validFiles.map((file) => ({
       file,
@@ -184,6 +197,10 @@ export const UploadArea: React.FC = () => {
     setUploadProgress({});
   };
 
+  const handleClosePopup = () => {
+    setErrorPopup({ isOpen: false, message: '' });
+  };
+
   return (
     <UploadContainer
       $isDragging={isDragging}
@@ -199,12 +216,10 @@ export const UploadArea: React.FC = () => {
         handleFiles(files);
       }}
     >
-      {showErrorPopup && (
-        <ErrorPopup
-          message={errorMessage}
-          onClose={() => setShowErrorPopup(false)}
-        />
+      {errorPopup.isOpen && (
+        <ErrorPopup message={errorPopup.message} onClose={handleClosePopup} />
       )}
+
       {successMessage ? (
         <>
           <SuccessMessage>{successMessage}</SuccessMessage>
