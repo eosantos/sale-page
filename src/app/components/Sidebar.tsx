@@ -70,6 +70,37 @@ const Menu = styled.div`
   margin-top: 20px;
 `;
 
+// Estilização para o contador de notificações
+const NotificationContainer = styled.span`
+  position: relative;
+  display: inline-block;
+  margin-left: 5px;
+
+  .count {
+    position: absolute;
+    top: -15px;
+    left: 75px;
+    background-color: white;
+    color: red;
+    border-radius: 50%;
+    padding: 3px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 1; // Adicionado para garantir que a bolinha branca fique acima
+  }
+
+  .inner-circle {
+    position: absolute;
+    background-color: red;
+    border-radius: 50%;
+    width: 8px; // Tamanho da bolinha vermelha
+    height: 8px; // Tamanho da bolinha vermelha
+    top: 3px; // Ajuste para posicionar a bolinha vermelha na parte inferior da bolinha branca
+    left: 95px; // Ajuste para centralizar a bolinha vermelha sobre a bolinha branca
+    z-index: 2; // Adicionado para garantir que a bolinha vermelha fique acima
+  }
+`;
+
 const Content = styled.main`
   margin-left: 250px; /* Espaço reservado para a Sidebar */
   padding: 80px 20px; /* Espaçamento interno para o conteúdo e evitar sobreposição do Header */
@@ -124,7 +155,12 @@ export const Sidebar = () => {
           <MenuItem>Pessoal</MenuItem>
           <MenuItem>Meu Portfólio</MenuItem>
           <MenuItem onClick={handleSubMenuToggle}>
-            Liquidação <span>(4)</span>
+            Liquidação
+            <NotificationContainer>
+              <div className="outer-circle" />
+              <div className="inner-circle" />
+              <span className="count">{offers.length}</span>
+            </NotificationContainer>
           </MenuItem>
           {isSubMenuOpen && ( // Renderiza o submenu se estiver aberto
             <>
@@ -151,7 +187,7 @@ export const Sidebar = () => {
             <PaymentInfo offer={offers[selectedOfferIndex]} />
           </>
         )}
-        <h2>Considerações importantes</h2>
+
         <ImportantConsiderations />
         <h2>APÓS EFETUAR O PAGAMENTO</h2>
         <UploadArea />
