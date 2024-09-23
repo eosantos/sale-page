@@ -6,6 +6,7 @@ import { Sidebar } from '../app/components/Sidebar';
 import { fetchOffers, Offer } from '../app/services/api';
 import { OfferDetail } from '../app/components/OfferDetail';
 import { PaymentInfo } from './components/PaymentInfo';
+import { ImportantConsiderations } from './components/ImportantConsiderations';
 import styled from 'styled-components';
 
 const MainContainer = styled.div`
@@ -48,6 +49,8 @@ export default function Home() {
               <PaymentInfo offer={offer} />
             </div>
           ))}
+          <h2>Considerações importantes</h2>
+          <ImportantConsiderations />
         </Content>
       </MainContainer>
     </>
