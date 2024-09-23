@@ -5,6 +5,7 @@ import { Header } from '../app/components/Header';
 import { Sidebar } from '../app/components/Sidebar';
 import { fetchOffers, Offer } from '../app/services/api';
 import { OfferDetail } from '../app/components/OfferDetail';
+import { PaymentInfo } from './components/PaymentInfo';
 import styled from 'styled-components';
 
 const MainContainer = styled.div`
@@ -44,6 +45,7 @@ export default function Home() {
           {offers.map((offer, index) => (
             <div key={index}>
               <OfferDetail offer={offer} />
+              <PaymentInfo offer={offer} />
             </div>
           ))}
         </Content>

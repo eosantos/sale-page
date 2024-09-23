@@ -29,6 +29,8 @@ export const OfferDetail: React.FC<OfferDetailProps> = ({ offer }) => {
   return (
     <OfferContainer>
       <OfferTitle>{offer.nome_oferta}</OfferTitle>
+      <p>{offer.slogan}</p>
+      <p>Status: {offer.status}</p>
       <OfferSubtitle>
         Para finalizar seu investimento, faça transferência para a conta
         bancária da {offer.nome_oferta}
