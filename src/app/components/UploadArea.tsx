@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ErrorPopup from './ErrorPopup';
 import styled from 'styled-components';
 
 const UploadContainer = styled.div<{ $isDragging: boolean }>`
@@ -106,6 +107,8 @@ export const UploadArea: React.FC = () => {
     [key: string]: number;
   }>({});
   const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
 
   const handleFileSelect = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -131,7 +134,10 @@ export const UploadArea: React.FC = () => {
     });
 
     if (validFiles.length === 0) {
-      alert('Nenhum arquivo válido para upload ou arquivos duplicados.');
+      setErrorMessage(
+        'Nenhum arquivo válido para upload. Certifique-se de que os arquivos são menores que 25MB e em formato PDF, JPEG ou PNG.'
+      );
+      setShowErrorPopup(true);
       return;
     }
 
@@ -193,6 +199,12 @@ export const UploadArea: React.FC = () => {
         handleFiles(files);
       }}
     >
+      {showErrorPopup && (
+        <ErrorPopup
+          message={errorMessage}
+          onClose={() => setShowErrorPopup(false)}
+        />
+      )}
       {successMessage ? (
         <>
           <SuccessMessage>{successMessage}</SuccessMessage>
