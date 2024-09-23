@@ -103,8 +103,16 @@ export const UploadArea: React.FC = () => {
         'image/jpeg',
         'image/png'
       ].includes(file.type);
-      return isValidSize && isValidType;
+      const isDuplicate = uploadedFiles.some(
+        (uploadedFile) => uploadedFile.file.name === file.name
+      );
+      return isValidSize && isValidType && !isDuplicate;
     });
+
+    if (validFiles.length === 0) {
+      alert('Nenhum arquivo válido para upload ou arquivos duplicados.');
+      return;
+    }
 
     const newFiles = validFiles.map((file) => ({
       file,
@@ -131,10 +139,20 @@ export const UploadArea: React.FC = () => {
     setUploadedFiles(uploadedFiles.filter((file) => file.id !== id));
   };
 
-  const handleFinishUpload = () => {
-    // Lógica para finalizar o envio (pode ser uma chamada de API, etc.)
-    alert('Upload finalizado com sucesso!');
-    setUploadedFiles([]);
+  // src/components/UploadArea.tsx
+
+  const handleFinishUpload = async () => {
+    try {
+      // Simulação de envio dos arquivos
+      await new Promise((resolve) => setTimeout(resolve, 2000)); // Simula um delay de 2 segundos
+
+      // Poderia implementar a lógica real para enviar os arquivos a uma API
+
+      alert('Upload finalizado com sucesso!');
+      setUploadedFiles([]);
+    } catch (error) {
+      alert('Erro ao enviar os arquivos. Tente novamente!');
+    }
   };
 
   return (
