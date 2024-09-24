@@ -4,7 +4,6 @@ import { FaFileContract, FaBan, FaMoneyBill, FaClock } from 'react-icons/fa';
 const ConsiderationsContainer = styled.div`
   margin-top: 20px;
   padding: 20px;
-  border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #f9f9f9;
   display: flex;
@@ -13,13 +12,11 @@ const ConsiderationsContainer = styled.div`
 `;
 
 const ConsiderationItem = styled.div`
-  display: flex;
   flex-direction: column;
   align-items: center;
   width: 22%; /* Para garantir 4 cards por linha */
   margin-bottom: 20px;
   text-align: left; /* Alinha o conteúdo à esquerda */
-  border: 1px solid #ddd;
   padding: 15px;
   border-radius: 8px;
   background-color: #fff;
@@ -35,8 +32,9 @@ const ConsiderationItem = styled.div`
 
 const IconWrapper = styled.div`
   margin-bottom: 10px;
-  font-size: 24px;
+  font-size: 40px;
   color: green;
+  text-align: left;
 `;
 
 const TextWrapper = styled.p`
@@ -51,6 +49,7 @@ const ConsiderationsTitle = styled.h3`
   margin-bottom: 20px;
   text-align: left; /* Alinha o título à esquerda */
   width: 100%;
+  color: #015047;
 `;
 
 const parseBoldText = (text: string) => {
@@ -63,7 +62,7 @@ const parseBoldText = (text: string) => {
 export const ImportantConsiderations: React.FC = () => {
   return (
     <ConsiderationsContainer>
-      <ConsiderationsTitle>Considerações importantes</ConsiderationsTitle>
+      <ConsiderationsTitle>CONSIDERAÇÕES IMPORTANTES</ConsiderationsTitle>
       <ConsiderationItem>
         <IconWrapper>
           <FaFileContract />
