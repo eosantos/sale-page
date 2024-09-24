@@ -209,7 +209,6 @@ export const Sidebar = () => {
       </SidebarContainer>
 
       <Content>
-        <h1>Você está quase lá!</h1>
         {error && <p>{error}</p>}
         {offers.length > 0 && (
           <>
