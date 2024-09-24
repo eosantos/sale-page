@@ -1,4 +1,3 @@
-// api.ts
 export interface Offer {
   nome_oferta: string;
   slogan: string;
@@ -14,12 +13,13 @@ export interface Offer {
   imagem_qrcode: string;
 }
 
+// Função para buscar ofertas da API
 export const fetchOffers = async (): Promise<Offer[]> => {
-  const response = await fetch(
-    'https://66d62a1ef5859a704268886b.mockapi.io/api/v1/oferta'
-  );
+  const response = await fetch(process.env.NEXT_PUBLIC_API_URL || '');
+
   if (!response.ok) {
     throw new Error('Failed to fetch offers');
   }
+
   return await response.json();
 };
