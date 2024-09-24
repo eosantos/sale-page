@@ -48,7 +48,7 @@ const QRCodeContainer = styled.div`
   justify-items: center;
 `;
 
-const CopyButton = styled.button<{ copied: boolean }>`
+const CopyButton = styled.button<{ $copied: boolean }>`
   width: 245px;
   height: 45px;
   background-color: transparent;
@@ -67,7 +67,7 @@ const CopyButton = styled.button<{ copied: boolean }>`
   }
 
   ${(props) =>
-    props.copied &&
+    props.$copied && // Alterado para '$copied'
     `
     background-color: #dff0d8;
     color: #3c763d;
@@ -146,27 +146,25 @@ export const PaymentInfo: React.FC<PaymentInfoProps> = ({ offer }) => {
           <>
             <QRCodeContainer>
               <QRCodeGenerator offer={offer} />
-              <CopyButton copied={copied} onClick={copyToClipboard}>
+              <CopyButton $copied={copied} onClick={copyToClipboard}>
                 {copied ? 'Copiado!' : 'Copiar Chave PIX'}
               </CopyButton>
             </QRCodeContainer>
             <PaymentDetailsContainer>
               <PaymentDetailsColumn>
                 <PaymentDetailTitle>CHAVE PIX (CNPJ)</PaymentDetailTitle>
-                <PaymentDetail> {offer.cnpj}</PaymentDetail>
-                <PaymentDetailTitle>BANCO </PaymentDetailTitle>
+                <PaymentDetail>{offer.cnpj}</PaymentDetail>
+                <PaymentDetailTitle>BANCO</PaymentDetailTitle>
                 <PaymentDetail>{offer.banco}</PaymentDetail>
-                <PaymentDetailTitle>CONTA CORRENTE </PaymentDetailTitle>
-                <PaymentDetailTitle>
-                  {offer.numero_conta_corrente}
-                </PaymentDetailTitle>
+                <PaymentDetailTitle>CONTA CORRENTE</PaymentDetailTitle>
+                <PaymentDetail>{offer.numero_conta_corrente}</PaymentDetail>
               </PaymentDetailsColumn>
               <PaymentDetailsColumn>
                 <PaymentDetailTitle>FAVORECIDO</PaymentDetailTitle>
-                <PaymentDetail> {offer.nome_favorecido}</PaymentDetail>
+                <PaymentDetail>{offer.nome_favorecido}</PaymentDetail>
                 <PaymentDetailTitle>AGÊNCIA</PaymentDetailTitle>
                 <PaymentDetail>{offer.agencia}</PaymentDetail>
-                <PaymentDetailTitle>CNPJ </PaymentDetailTitle>
+                <PaymentDetailTitle>CNPJ</PaymentDetailTitle>
                 <PaymentDetail>{offer.cnpj}</PaymentDetail>
               </PaymentDetailsColumn>
             </PaymentDetailsContainer>
@@ -174,17 +172,17 @@ export const PaymentInfo: React.FC<PaymentInfoProps> = ({ offer }) => {
         ) : (
           <PaymentDetailsContainer>
             <PaymentDetailsColumn>
-              <PaymentDetailTitle>BANCO </PaymentDetailTitle>
+              <PaymentDetailTitle>BANCO</PaymentDetailTitle>
               <PaymentDetail>{offer.banco}</PaymentDetail>
-              <PaymentDetailTitle>CONTA CORRENTE </PaymentDetailTitle>
+              <PaymentDetailTitle>CONTA CORRENTE</PaymentDetailTitle>
               <PaymentDetail>{offer.numero_conta_corrente}</PaymentDetail>
               <PaymentDetailTitle>AGÊNCIA</PaymentDetailTitle>
               <PaymentDetail>{offer.agencia}</PaymentDetail>
             </PaymentDetailsColumn>
             <PaymentDetailsColumn>
               <PaymentDetailTitle>FAVORECIDO</PaymentDetailTitle>
-              <PaymentDetail> {offer.nome_favorecido}</PaymentDetail>
-              <PaymentDetailTitle>CNPJ </PaymentDetailTitle>
+              <PaymentDetail>{offer.nome_favorecido}</PaymentDetail>
+              <PaymentDetailTitle>CNPJ</PaymentDetailTitle>
               <PaymentDetail>{offer.cnpj}</PaymentDetail>
             </PaymentDetailsColumn>
           </PaymentDetailsContainer>

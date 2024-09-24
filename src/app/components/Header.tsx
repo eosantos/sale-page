@@ -4,14 +4,14 @@ import logoImage from '../assets/logo.png';
 
 const HeaderContainer = styled.header`
   display: flex;
-  align-items: center; /* Alinha verticalmente */
+  align-items: center;
   padding: 20px;
   background-color: #f5f5f5;
   border-bottom: 2px solid #e5e5e5;
-  position: fixed; /* Mantém o header fixo no topo */
-  top: 0; /* Fixa no topo */
-  width: 100%; /* Largura total */
-  z-index: 1001; /* Garante que o header fique acima de outros elementos */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1001;
 `;
 
 const Logo = styled.div`
@@ -25,13 +25,11 @@ const HamburgerButton = styled.button`
   border: none;
   cursor: pointer;
   font-size: 30px;
-  margin-right: 20px; /* Espaço entre o botão e o logo */
+  margin-right: 20px;
 
   &:focus {
     outline: none;
   }
-
-  /* Removido: não esconder em telas maiores */
 `;
 
 export const Header = ({ toggleSidebar }: { toggleSidebar: () => void }) => {

@@ -7,27 +7,26 @@ const ConsiderationsContainer = styled.div`
   border-radius: 8px;
   background-color: #f9f9f9;
   display: flex;
-  justify-content: space-between; /* Para distribuir os cards igualmente */
-  flex-wrap: wrap; /* Para garantir que os cards se ajustem em telas menores */
+  justify-content: space-between;
+  flex-wrap: wrap;
 `;
 
 const ConsiderationItem = styled.div`
   flex-direction: column;
   align-items: center;
-  width: 22%; /* Para garantir 4 cards por linha */
+  width: 22%;
   margin-bottom: 20px;
-  text-align: left; /* Alinha o conteúdo à esquerda */
+  text-align: left;
   padding: 15px;
   border-radius: 8px;
   background-color: #fff;
 
   @media (max-width: 1024px) {
-    width: 48%; /* 2 cards por linha em telas menores */
+    width: 48%;
   }
 
   @media (max-width: 768px) {
-    width: 100%; /* 1 card por linha em telas pequenas */
-  }
+    width: 100%;
 `;
 
 const IconWrapper = styled.div`

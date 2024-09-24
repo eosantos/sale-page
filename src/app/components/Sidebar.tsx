@@ -8,15 +8,12 @@ import { UploadArea } from '../components/UploadArea';
 import { fetchOffers, Offer } from '../services/api';
 import { FaCoins, FaUser, FaArrowRightArrowLeft } from 'react-icons/fa6';
 
-const SidebarContainer = styled.div<{ isOpen: boolean }>`
+const SidebarContainer = styled.div<{ $isOpen: boolean }>`
   position: fixed;
-  top: 60px; /* Fica logo abaixo do Header */
-  left: ${({ isOpen }) =>
-    isOpen
-      ? '0'
-      : '-250px'}; /* Controle para abrir e fechar em dispositivos menores */
+  top: 60px;
+  left: ${({ $isOpen }) => ($isOpen ? '0' : '-250px')};
   width: 250px;
-  height: calc(100% - 60px); /* Altura ajustada para não cobrir o Header */
+  height: calc(100% - 60px);
   background-color: #eef2f5;
   border: 1px solid #d6dadc;
   transition: left 0.3s ease;
@@ -25,13 +22,13 @@ const SidebarContainer = styled.div<{ isOpen: boolean }>`
   color: #373737;
 
   @media (min-width: 780px) {
-    left: 0; /* Sidebar sempre visível em telas maiores */
+    left: 0;
   }
 `;
 
 const UploadTitle = styled.h3`
   margin-bottom: 20px;
-  text-align: left
+  text-align: left;
   width: 100%;
   color: #015047;
 `;
@@ -51,16 +48,16 @@ const CloseButton = styled.button`
   }
 `;
 
-const MenuItem = styled.p<{ isSelected?: boolean; isDisabled?: boolean }>`
+const MenuItem = styled.div<{ $isSelected?: boolean; $isDisabled?: boolean }>`
   padding: 15px;
-  font-size: ${({ isDisabled }) => (isDisabled ? '13px' : '18px')};
-  cursor: ${({ isDisabled }) =>
-    isDisabled
+  font-size: ${({ $isDisabled }) => ($isDisabled ? '13px' : '18px')};
+  cursor: ${({ $isDisabled }) =>
+    $isDisabled
       ? 'default'
       : 'pointer'}; /* Desabilita o cursor se for 'Pessoal' */
-  color: ${({ isSelected }) => (isSelected ? '#20651F' : '#373737')};
-  background-color: ${({ isSelected }) =>
-    isSelected ? '#CFE4D5' : 'transparent'}; /* Fundo selecionado */
+  color: ${({ $isSelected }) => ($isSelected ? '#20651F' : '#373737')};
+  background-color: ${({ $isSelected }) =>
+    $isSelected ? '#CFE4D5' : 'transparent'}; /* Fundo selecionado */
   transition: background-color 0.2s;
 
   &:hover {
@@ -69,11 +66,11 @@ const MenuItem = styled.p<{ isSelected?: boolean; isDisabled?: boolean }>`
   }
 `;
 
-const SubMenuItem = styled.p<{ isSelected?: boolean }>`
+const SubMenuItem = styled.p<{ $isSelected?: boolean }>`
   padding: 5px 50px;
   font-size: 12px;
   cursor: pointer;
-  color: ${({ isSelected }) => (isSelected ? '#20651F' : '#373737')};
+  color: ${({ $isSelected }) => ($isSelected ? '#20651F' : '#373737')};
   background-color: transparent;
   transition: background-color 0.2s;
 
@@ -87,8 +84,7 @@ const Menu = styled.div`
   margin-top: 20px;
 `;
 
-// Estilização para o contador de notificações
-const NotificationContainer = styled.span`
+const NotificationContainer = styled.div`
   position: relative;
   display: inline-block;
   margin-left: 5px;
@@ -103,7 +99,7 @@ const NotificationContainer = styled.span`
     padding: 3px 10px;
     font-size: 14px;
     font-weight: bold;
-    z-index: 1; // Adicionado para garantir que a bolinha branca fique acima
+    z-index: 1;
   }
 
   .inner-circle {
@@ -114,7 +110,7 @@ const NotificationContainer = styled.span`
     height: 8px;
     top: 3px;
     left: 85px;
-    z-index: 2; // Adicionado para garantir que a bolinha vermelha fique acima
+    z-index: 2;
   }
 `;
 
@@ -133,10 +129,10 @@ export const Sidebar = () => {
   const [offers, setOffers] = useState<Offer[]>([]);
   const [selectedOfferIndex, setSelectedOfferIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
-  const [isSubMenuOpen, setIsSubMenuOpen] = useState(false); // Novo estado para controlar o submenu
+  const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
   const [selectedSubMenuIndex, setSelectedSubMenuIndex] = useState<
     number | null
-  >(null); // Índice do submenu selecionado
+  >(null);
 
   useEffect(() => {
     const getOffers = async () => {
@@ -156,7 +152,7 @@ export const Sidebar = () => {
   };
 
   const handleSubMenuToggle = () => {
-    setIsSubMenuOpen(!isSubMenuOpen); // Alterna a visibilidade do submenu
+    setIsSubMenuOpen(!isSubMenuOpen);
   };
 
   const handleOfferSelect = (index: number) => {
@@ -164,26 +160,21 @@ export const Sidebar = () => {
   };
 
   const handleSubMenuSelect = (index: number) => {
-    setSelectedSubMenuIndex(index); // Altera o índice do submenu selecionado
+    setSelectedSubMenuIndex(index);
   };
 
   return (
     <>
       <Header toggleSidebar={toggleSidebar} />
 
-      <SidebarContainer isOpen={isOpen}>
-        <CloseButton onClick={toggleSidebar}>
-          &#x2715; {/* Ícone de "X" */}
-        </CloseButton>
+      <SidebarContainer $isOpen={isOpen}>
+        <CloseButton onClick={toggleSidebar}>&#x2715;</CloseButton>
         <Menu>
-          <MenuItem isDisabled>Pessoal</MenuItem> {/* 'Pessoal' desabilitado */}
+          <MenuItem $isDisabled>Pessoal</MenuItem>
           <MenuItem>
             <FaCoins style={{ marginRight: '10px' }} /> Meu Portfólio
           </MenuItem>
-          <MenuItem
-            onClick={handleSubMenuToggle}
-            isSelected={isSubMenuOpen} // Indica se o submenu está aberto
-          >
+          <MenuItem onClick={handleSubMenuToggle} $isSelected={isSubMenuOpen}>
             <span>
               <FaArrowRightArrowLeft style={{ marginRight: '10px' }} />
               Liquidação
@@ -193,16 +184,16 @@ export const Sidebar = () => {
               <div className="inner-circle" />
             </NotificationContainer>
           </MenuItem>
-          {isSubMenuOpen && ( // Renderiza o submenu se estiver aberto
+          {isSubMenuOpen && (
             <>
               {offers.map((offer, index) => (
                 <SubMenuItem
                   key={index}
                   onClick={() => {
                     handleOfferSelect(index);
-                    handleSubMenuSelect(index); // Muda a seleção do submenu
+                    handleSubMenuSelect(index);
                   }}
-                  isSelected={selectedSubMenuIndex === index} // Adiciona a verificação de seleção
+                  $isSelected={selectedSubMenuIndex === index}
                 >
                   {offer.nome_oferta}
                 </SubMenuItem>
