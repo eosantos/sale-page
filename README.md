@@ -11,8 +11,13 @@ de cada oferta e faça o upload dos comprovantes de pagamento.
 <br>
 <hr>
 <div align="center">
-	<img width="140" src="src/app/assets/to_readme/Tela_001.png">	
-	<img width="140" src="src/app/assets/to_readme/Tela_002.png">
+	<div style="display: inline-block; margin-right: 10px;">
+		<img width="140" src="src/app/assets/to_readme/Tela_001.png">	
+	</div>
+	<div style="display: inline-block; margin-right: 10px;">
+		<img width="140" src="src/app/assets/to_readme/Tela_002.png">
+	</div>
+  <br>
   <img width="590" src="src/app/assets/to_readme/Tela_003.png">
 </div>
 <hr>
@@ -24,7 +29,7 @@ de cada oferta e faça o upload dos comprovantes de pagamento.
     ├── src                            (Diretório principal dos arquivos do projeto)
     │   ├── assets                     (Recursos de folhas de estilo, scripts, fontes e imagens)
     │   ├── components                 (Componentes que não possuem estados, são chamados de dummy components)
-    │   ├── service                    (Utilizado para transferir dados através de protocolos de comunicação para diferentes plataformas)
+    │   ├── services                    (Utilizado para transferir dados através de protocolos de comunicação para diferentes plataformas)
     ├── README.md                      (Breve definição/Documentação)
     └── ...                            (Outros arquivos de configuração)
 
