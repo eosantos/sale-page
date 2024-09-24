@@ -38,7 +38,7 @@ const IconWrapper = styled.div`
 `;
 
 const TextWrapper = styled.p`
-  text-align: left; /* Alinha o texto à esquerda dentro dos cards */
+  text-align: left;
 `;
 
 const BoldText = styled.span`
@@ -47,7 +47,7 @@ const BoldText = styled.span`
 
 const ConsiderationsTitle = styled.h3`
   margin-bottom: 20px;
-  text-align: left; /* Alinha o título à esquerda */
+  text-align: left;
   width: 100%;
   color: #015047;
 `;

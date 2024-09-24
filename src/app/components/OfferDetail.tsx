@@ -7,6 +7,7 @@ const OfferContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 20px;
+  margin-top: 25px;
   border-radius: 8px;
   background-color: #f9f9f9;
 

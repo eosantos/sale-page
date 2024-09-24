@@ -29,6 +29,13 @@ const SidebarContainer = styled.div<{ isOpen: boolean }>`
   }
 `;
 
+const UploadTitle = styled.h3`
+  margin-bottom: 20px;
+  text-align: left
+  width: 100%;
+  color: #015047;
+`;
+
 const CloseButton = styled.button`
   position: absolute;
   top: 20px;
@@ -216,9 +223,8 @@ export const Sidebar = () => {
             <PaymentInfo offer={offers[selectedOfferIndex]} />
           </>
         )}
-
         <ImportantConsiderations />
-        <h2>APÓS EFETUAR O PAGAMENTO</h2>
+        <UploadTitle>APÓS EFETUAR O PAGAMENTO</UploadTitle>
         <UploadArea />
       </Content>
     </>

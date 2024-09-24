@@ -3,9 +3,9 @@ import ErrorPopup from './ErrorPopup';
 import styled from 'styled-components';
 
 const UploadContainer = styled.div<{ $isDragging: boolean }>`
-  margin-top: 30px;
-  padding: 40px;
-  border: 2px dashed ${({ $isDragging }) => ($isDragging ? '#007bff' : '#ccc')};
+  margin-top: 20px;
+  padding: 60px;
+  border: 2px dashed ${({ $isDragging }) => ($isDragging ? '#015047' : '#ccc')};
   border-radius: 10px;
   text-align: center;
   background-color: ${({ $isDragging }) =>
@@ -15,18 +15,29 @@ const UploadContainer = styled.div<{ $isDragging: boolean }>`
     border-color 0.3s;
 `;
 
+const UploadTitle = styled.h1`
+  font-size: 18px;
+  margin-bottom: 10px;
+`;
+
+const UploadSubtitle = styled.h1`
+  font-size: 16px;
+  margin-bottom: 20px;
+  font-weight: 400;
+`;
+
 const ProgressBarContainer = styled.div`
   width: 100%;
-  max-width: 300px; // Limite máximo da barra
+  max-width: 300px;
   background-color: #f3f3f3;
   border-radius: 5px;
-  margin: 10px auto; // Centraliza a barra
+  margin: 10px auto;
 `;
 
 const ProgressBar = styled.div<{ progress: number }>`
   width: ${({ progress }) => progress}%;
   height: 10px;
-  background-color: #4caf50;
+  background-color: #015047;
   border-radius: 5px;
   transition: width 0.3s ease;
 `;
@@ -44,42 +55,46 @@ const UploadedFilesList = styled.ul`
 
 const FinishButton = styled.button`
   margin-top: 20px;
-  background-color: #28a745;
+  background-color: #015047;
   color: white;
-  padding: 10px 20px;
+  padding: 10px 50px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 
   &:hover {
-    background-color: #218838;
+    background-color: #015049;
   }
 `;
 
 const SelectFileButton = styled.label`
-  background-color: #007bff;
-  color: white;
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  color: #015047;
+  border: 1px solid #015047;
   padding: 10px 20px;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
   display: inline-block;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: #015047;
+    color: #f9f9f9;
   }
 `;
 
 const DeleteButton = styled.button`
-  background-color: #dc3545;
+  background-color: #8c8c8c;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
   cursor: pointer;
+  margin-left: 50px;
+  margin-bottom: 10px;
 
   &:hover {
-    background-color: #c82333;
+    background-color: #212121;
   }
 `;
 
@@ -247,8 +262,12 @@ export const UploadArea: React.FC = () => {
 
           {uploadedFiles.length === 0 && loadingFiles.length === 0 && (
             <>
-              <h3>Anexe aqui seu(s) comprovante(s) de pagamento.</h3>
-              <p>Arquivos permitidos: PDF, JPEG ou PNG - Max 25mb</p>
+              <UploadTitle>
+                Anexe aqui seu(s) comprovante(s) de pagamento.
+              </UploadTitle>
+              <UploadSubtitle>
+                Arquivos permitidos: PDF, JPEG ou PNG - Max 25mb
+              </UploadSubtitle>
             </>
           )}
 
@@ -266,7 +285,7 @@ export const UploadArea: React.FC = () => {
                         )
                       }
                     >
-                      Excluir
+                      x
                     </DeleteButton>
                   </li>
                 ))}
