@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import ErrorPopup from './ErrorPopup';
+import { HiArrowDownTray } from 'react-icons/hi2';
+import { GiPaperClip } from 'react-icons/gi';
+
 import styled from 'styled-components';
 
 const UploadContainer = styled.div<{ $isDragging: boolean }>`
   margin-top: 20px;
   padding: 60px;
-  border: 2px dashed ${({ $isDragging }) => ($isDragging ? '#015047' : '#ccc')};
+  border: 2px ${({ $isDragging }) => ($isDragging ? 'dashed' : 'solid')} #015047;
   border-radius: 10px;
   text-align: center;
   background-color: ${({ $isDragging }) =>
@@ -15,15 +18,36 @@ const UploadContainer = styled.div<{ $isDragging: boolean }>`
     border-color 0.3s;
 `;
 
+const UploadTitleContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  @media (max-width: 780px) {
+    display: block;
+  }
+`;
+
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const UploadTitle = styled.h1`
   font-size: 18px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 `;
 
 const UploadSubtitle = styled.h1`
   font-size: 16px;
-  margin-bottom: 20px;
   font-weight: 400;
+`;
+
+const HiArrowDownTrayIcon = styled.span`
+  font-size: 35px;
+  color: #015047;
+  margin-right: 20px; // Ajuste se necessário
 `;
 
 const ProgressBarContainer = styled.div`
@@ -109,10 +133,20 @@ const SuccessMessage = styled.p`
   font-weight: bold;
 `;
 
+const GiPaperClipIcon = styled.span`
+  margin-left: 5px;
+`;
+
 interface UploadedFile {
   file: File;
   id: string;
 }
+
+const DragMessage = styled.p`
+  font-size: 18px;
+  color: #015047;
+  margin-top: 10px;
+`;
 
 export const UploadArea: React.FC = () => {
   const [isDragging, setIsDragging] = useState(false);
@@ -262,12 +296,28 @@ export const UploadArea: React.FC = () => {
 
           {uploadedFiles.length === 0 && loadingFiles.length === 0 && (
             <>
-              <UploadTitle>
-                Anexe aqui seu(s) comprovante(s) de pagamento.
-              </UploadTitle>
-              <UploadSubtitle>
-                Arquivos permitidos: PDF, JPEG ou PNG - Max 25mb
-              </UploadSubtitle>
+              {isDragging ? (
+                <UploadTitleContainer>
+                  <HiArrowDownTrayIcon>
+                    <HiArrowDownTray />
+                  </HiArrowDownTrayIcon>
+                  <DragMessage>SOLTE AQUI SEUS ARQUIVOS</DragMessage>
+                </UploadTitleContainer>
+              ) : (
+                <UploadTitleContainer>
+                  <HiArrowDownTrayIcon>
+                    <HiArrowDownTray />
+                  </HiArrowDownTrayIcon>
+                  <TextContainer>
+                    <UploadTitle>
+                      Anexe aqui seu(s) comprovante(s) de pagamento.
+                    </UploadTitle>
+                    <UploadSubtitle>
+                      Arquivos permitidos: PDF, JPEG ou PNG - Max 25mb
+                    </UploadSubtitle>
+                  </TextContainer>
+                </UploadTitleContainer>
+              )}
             </>
           )}
 
@@ -293,19 +343,26 @@ export const UploadArea: React.FC = () => {
             </>
           )}
 
-          {/* Mostra os botões "Selecionar Arquivo" e "Finalizar Envio" quando não há arquivos carregados */}
-          {uploadedFiles.length === 0 && loadingFiles.length === 0 && (
-            <ButtonContainer>
-              <SelectFileButton htmlFor="file-upload">
-                Selecionar Arquivo
-              </SelectFileButton>
-            </ButtonContainer>
-          )}
+          {uploadedFiles.length === 0 &&
+            loadingFiles.length === 0 &&
+            !isDragging && (
+              <ButtonContainer>
+                <SelectFileButton htmlFor="file-upload">
+                  ADICIONAR ARQUIVO
+                  <GiPaperClipIcon>
+                    <GiPaperClip />
+                  </GiPaperClipIcon>
+                </SelectFileButton>
+              </ButtonContainer>
+            )}
 
           {uploadedFiles.length > 0 && loadingFiles.length === 0 && (
             <ButtonContainer>
               <SelectFileButton htmlFor="file-upload">
-                Selecionar Arquivo
+                ADICIONAR ARQUIVO
+                <GiPaperClipIcon>
+                  <GiPaperClip />
+                </GiPaperClipIcon>
               </SelectFileButton>
               <FinishButton onClick={handleFinishUpload}>
                 Finalizar Envio
