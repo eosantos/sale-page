@@ -73,3 +73,27 @@ Para iniciar o projeto basta executar o comando abaixo:
 npm run dev
 ```
 Após a execução do comando acima basta abrir o link `http://localhost:3000`.
+
+
+### Commit
+
+Para nossos commits utilizamos a seguinte estrutura:
+
+```
+feat: mensagem curta
+^--^  ^------------^
+|     |
+|     +-> Resumo da alteração
+|
++-------> Tipos: chore, docs, feat, fix, refactor, style, or test.
+```
+
+#### Exemplos
+
+- `feat/feature`: (novo recurso para o usuário, não um novo recurso para script de compilação)
+- `fix`: (correção de bug para o usuário, não uma correção para um script de construção)
+- `docs`: (alterações na documentação)
+- `style`: (formatação, ponto e vírgula faltando etc; sem alteração do código de produção)
+- `refactor`: (refatorando o código de produção, por exemplo, renomeando uma variável)
+- `test`: (adicionando testes ausentes, testes de refatoração; nenhuma alteração no código de produção)
+- `chore`: (atualização de tarefas e etc; sem alteração do código de produção)

@@ -59,7 +59,7 @@ const CopyButton = styled.button<{ $copied: boolean }>`
 
   @media (max-width: 1024px) {
     text-align: center;
-    margin-bottom: 30px;
+    margin: 20px 0 30px 0;
   }
 
   &:hover {
@@ -110,6 +110,10 @@ const ChangePaymentMethod = styled.p`
 
   &:hover {
     color: #8c8c8c;
+  }
+
+  @media (max-width: 1024px) {
+    text-align: center;
   }
 `;
 

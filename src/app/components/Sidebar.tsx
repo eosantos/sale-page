@@ -120,8 +120,7 @@ const Content = styled.main`
   background-color: #f9f9f9;
 
   @media (max-width: 780px) {
-    margin-left: 0; /* Remove o espaçamento da Sidebar em telas menores */
-  }
+    margin-left: 0;
 `;
 
 export const Sidebar = () => {
