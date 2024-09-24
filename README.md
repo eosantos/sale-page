@@ -11,9 +11,9 @@ de cada oferta e faça o upload dos comprovantes de pagamento.
 <br>
 <hr>
 <div align="center">
-	<img width="140" src="app/assets/Img/to_readme/Tela_001.png">	
-	<img width="140" src="app/assets/Img/to_readme/Tela_002.png">
-  <img width="590" src="app/assets/Img/to_readme/Tela_003.png">
+	<img width="140" src="app/assets/to_readme/Tela_001.png">	
+	<img width="140" src="app/assets/to_readme/Tela_002.png">
+  <img width="590" src="app/assets/to_readme/Tela_003.png">
 </div>
 <hr>
 <br>
