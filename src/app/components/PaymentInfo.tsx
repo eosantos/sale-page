@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { Offer } from '../services/api';
+import QRCodeGenerator from './QRCodeGenerator';
 
 const PaymentContainer = styled.div`
   padding: 20px;
@@ -45,12 +46,6 @@ const QRCodeContainer = styled.div`
   text-align: center;
   display: grid;
   justify-items: center;
-`;
-
-const QRCodeImage = styled.img`
-  width: 120px;
-  height: 105px;
-  margin-bottom: 10px;
 `;
 
 const CopyButton = styled.button<{ copied: boolean }>`
@@ -150,10 +145,7 @@ export const PaymentInfo: React.FC<PaymentInfoProps> = ({ offer }) => {
         {isPix ? (
           <>
             <QRCodeContainer>
-              <QRCodeImage
-                src={offer.imagem_qrcode}
-                alt="QR Code para pagamento via PIX"
-              />
+              <QRCodeGenerator offer={offer} />
               <CopyButton copied={copied} onClick={copyToClipboard}>
                 {copied ? 'Copiado!' : 'Copiar Chave PIX'}
               </CopyButton>
