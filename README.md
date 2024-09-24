@@ -11,10 +11,10 @@ de cada oferta e faça o upload dos comprovantes de pagamento.
 <br>
 <hr>
 <div align="center">
-	<div style="display: inline-block; margin-right: 10px;">
+	<div style="margin-right: 10px;">
 		<img width="140" src="src/app/assets/to_readme/Tela_001.png">	
 	</div>
-	<div style="display: inline-block; margin-right: 10px;">
+	<div style="margin-left: 10px;">
 		<img width="140" src="src/app/assets/to_readme/Tela_002.png">
 	</div>
   <br>
