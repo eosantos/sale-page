@@ -121,6 +121,7 @@ const Content = styled.main`
 
   @media (max-width: 780px) {
     margin-left: 0;
+  }
 `;
 
 export const Sidebar = () => {

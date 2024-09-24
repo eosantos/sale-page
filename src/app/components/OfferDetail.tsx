@@ -119,6 +119,13 @@ export const OfferDetail: React.FC<OfferDetailProps> = ({ offer }) => {
     });
   };
 
+  // Captura e inverte os dois primeiros nomes
+  const invertFirstTwoNames = (name: string) => {
+    const names = name.split(' '); // Divide o nome em partes
+    if (names.length < 2) return name; // Retorna o nome original se tiver menos de 2 partes
+    return `${names[1]} ${names[0]}`; // Retorna os dois primeiros nomes invertidos
+  };
+
   return (
     <OfferContainer>
       <Image src={logoImage} alt="Avatar" width={125} height={65} />
@@ -129,7 +136,10 @@ export const OfferDetail: React.FC<OfferDetailProps> = ({ offer }) => {
         <OfferStatus>Status: {offer.status}</OfferStatus>
         <OfferText>
           Para finalizar seu investimento, faça transferência para a conta
-          bancária da {offer.nome_oferta}
+          bancária da{' '}
+          <span style={{ color: '#015047', fontWeight: 'bold' }}>
+            {invertFirstTwoNames(offer.nome_oferta)}
+          </span>
         </OfferText>
       </OfferDetails>
       <PaymentInfoContainer>
