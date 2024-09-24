@@ -6,7 +6,7 @@ import { GiPaperClip } from 'react-icons/gi';
 import styled from 'styled-components';
 
 const UploadContainer = styled.div<{ $isDragging: boolean }>`
-  margin-top: 20px;
+  margin: 20px 0 0 20px;
   padding: 60px;
   border: 2px ${({ $isDragging }) => ($isDragging ? 'dashed' : 'solid')} #015047;
   border-radius: 10px;
@@ -125,7 +125,7 @@ const DeleteButton = styled.button`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  gap: 10px; // Espaço entre os botões
+  gap: 10px;
 `;
 
 const SuccessMessage = styled.p`

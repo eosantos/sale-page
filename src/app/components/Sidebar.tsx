@@ -7,6 +7,7 @@ import { ImportantConsiderations } from '../components/ImportantConsiderations';
 import { UploadArea } from '../components/UploadArea';
 import { fetchOffers, Offer } from '../services/api';
 import { FaCoins, FaUser, FaArrowRightArrowLeft } from 'react-icons/fa6';
+import Footer from '../components/Footer';
 
 const SidebarContainer = styled.div<{ $isOpen: boolean }>`
   position: fixed;
@@ -27,7 +28,7 @@ const SidebarContainer = styled.div<{ $isOpen: boolean }>`
 `;
 
 const UploadTitle = styled.h3`
-  margin-bottom: 20px;
+  margin: 0 0px 20px 20px;
   text-align: left;
   width: 100%;
   color: #015047;
@@ -217,6 +218,7 @@ export const Sidebar = () => {
         <ImportantConsiderations />
         <UploadTitle>APÓS EFETUAR O PAGAMENTO</UploadTitle>
         <UploadArea />
+        <Footer />
       </Content>
     </>
   );
