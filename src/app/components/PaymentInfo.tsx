@@ -3,32 +3,118 @@ import styled from 'styled-components';
 import { Offer } from '../services/api';
 
 const PaymentContainer = styled.div`
-  margin-top: 20px;
   padding: 20px;
-  border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #f1f1f1;
+  position: relative;
 `;
 
-const PaymentTitle = styled.h3`
-  margin-bottom: 15px;
-`;
-
-const PaymentDetails = styled.p`
-  margin: 5px 0;
-`;
-
-const PaymentButton = styled.button`
-  margin-top: 10px;
-  background-color: #007bff;
+const PaymentHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
   color: white;
-  padding: 10px 20px;
-  border: none;
+  padding: 10px;
+  border-radius: 8px 8px 0 0;
+`;
+
+const PaymentState = styled.h3`
+  color: white;
+  font-size: 16px;
+`;
+
+const MinimizeIcon = styled.div`
+  cursor: pointer;
+  font-size: 18px;
+`;
+
+const PaymentContent = styled.div`
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  font-weight: 600;
+
+  @media (max-width: 1024px) {
+    justify-content: center;
+  }
+`;
+
+const QRCodeContainer = styled.div`
+  text-align: center;
+  display: grid;
+  justify-items: center;
+`;
+
+const QRCodeImage = styled.img`
+  width: 120px;
+  height: 105px;
+  margin-bottom: 10px;
+`;
+
+const CopyButton = styled.button<{ copied: boolean }>`
+  width: 245px;
+  height: 45px;
+  background-color: transparent;
+  border: 1px solid #8c8c8c;
+  color: #212121;
+  cursor: pointer;
   border-radius: 5px;
+
+  @media (max-width: 1024px) {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  &:hover {
+    background-color: #e7f3ff;
+  }
+
+  ${(props) =>
+    props.copied &&
+    `
+    background-color: #dff0d8;
+    color: #3c763d;
+    border-color: #d6e9c6;
+  `}
+`;
+
+const PaymentDetailsContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  width: 60%;
+  gap: 20px;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+  }
+`;
+
+const PaymentDetailsColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`;
+
+const PaymentDetailTitle = styled.p`
+  margin-bottom: 0;
+`;
+
+const PaymentDetail = styled.p`
+  margin-bottom: 50px;
+`;
+
+const ChangePaymentMethod = styled.p`
+  text-align: left;
+  color: #212121;
+  text-decoration: underline;
   cursor: pointer;
 
   &:hover {
-    background-color: #0056b3;
+    color: #8c8c8c;
   }
 `;
 
@@ -38,39 +124,83 @@ interface PaymentInfoProps {
 
 export const PaymentInfo: React.FC<PaymentInfoProps> = ({ offer }) => {
   const [isPix, setIsPix] = useState(true);
+  const [copied, setCopied] = useState(false);
 
   const handlePaymentChange = () => {
     setIsPix(!isPix);
   };
 
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(offer.chave_pix);
+    setCopied(true);
+
+    // Volta o texto do botão para "Copiar Chave PIX" após 5 segundos
+    setTimeout(() => {
+      setCopied(false);
+    }, 5000);
+  };
+
   return (
     <PaymentContainer>
-      <PaymentTitle>Forma de Pagamento: {isPix ? 'PIX' : 'TED'}</PaymentTitle>
-      {isPix ? (
-        <>
-          <img src={offer.imagem_qrcode} alt="QR Code para pagamento via PIX" />
-          <PaymentDetails>Chave PIX: {offer.chave_pix}</PaymentDetails>
-          <PaymentDetails>FAVORECIDO: {offer.nome_favorecido}</PaymentDetails>
-          <PaymentDetails>BANCO: {offer.banco}</PaymentDetails>
-          <PaymentDetails>AGÊNCIA: {offer.agencia}</PaymentDetails>
-          <PaymentDetails>
-            CONTA CORRENTE CORRENTE: {offer.numero_conta_corrente}
-          </PaymentDetails>
-          <PaymentDetails>CNPJ: {offer.cnpj}</PaymentDetails>
-        </>
-      ) : (
-        <>
-          <PaymentDetails>BANCO: {offer.banco}</PaymentDetails>
-          <PaymentDetails>AGÊNCIA: {offer.agencia}</PaymentDetails>
-          <PaymentDetails>
-            CONTA CORRENTE CORRENTE: {offer.numero_conta_corrente}
-          </PaymentDetails>
-          <PaymentDetails>CNPJ: {offer.cnpj}</PaymentDetails>
-        </>
-      )}
-      <PaymentButton onClick={handlePaymentChange}>
-        {isPix ? 'Mudar para TED' : 'Mudar para PIX'}
-      </PaymentButton>
+      <PaymentHeader>
+        <PaymentState>{isPix ? 'PIX' : 'TED'}</PaymentState>
+        <MinimizeIcon>—</MinimizeIcon>
+      </PaymentHeader>
+      <PaymentContent>
+        {isPix ? (
+          <>
+            <QRCodeContainer>
+              <QRCodeImage
+                src={offer.imagem_qrcode}
+                alt="QR Code para pagamento via PIX"
+              />
+              <CopyButton copied={copied} onClick={copyToClipboard}>
+                {copied ? 'Copiado!' : 'Copiar Chave PIX'}
+              </CopyButton>
+            </QRCodeContainer>
+            <PaymentDetailsContainer>
+              <PaymentDetailsColumn>
+                <PaymentDetailTitle>CHAVE PIX (CNPJ)</PaymentDetailTitle>
+                <PaymentDetail> {offer.cnpj}</PaymentDetail>
+                <PaymentDetailTitle>BANCO </PaymentDetailTitle>
+                <PaymentDetail>{offer.banco}</PaymentDetail>
+                <PaymentDetailTitle>CONTA CORRENTE </PaymentDetailTitle>
+                <PaymentDetailTitle>
+                  {offer.numero_conta_corrente}
+                </PaymentDetailTitle>
+              </PaymentDetailsColumn>
+              <PaymentDetailsColumn>
+                <PaymentDetailTitle>FAVORECIDO</PaymentDetailTitle>
+                <PaymentDetail> {offer.nome_favorecido}</PaymentDetail>
+                <PaymentDetailTitle>AGÊNCIA</PaymentDetailTitle>
+                <PaymentDetail>{offer.agencia}</PaymentDetail>
+                <PaymentDetailTitle>CNPJ </PaymentDetailTitle>
+                <PaymentDetail>{offer.cnpj}</PaymentDetail>
+              </PaymentDetailsColumn>
+            </PaymentDetailsContainer>
+          </>
+        ) : (
+          <PaymentDetailsContainer>
+            <PaymentDetailsColumn>
+              <PaymentDetailTitle>BANCO </PaymentDetailTitle>
+              <PaymentDetail>{offer.banco}</PaymentDetail>
+              <PaymentDetailTitle>CONTA CORRENTE </PaymentDetailTitle>
+              <PaymentDetail>{offer.numero_conta_corrente}</PaymentDetail>
+              <PaymentDetailTitle>AGÊNCIA</PaymentDetailTitle>
+              <PaymentDetail>{offer.agencia}</PaymentDetail>
+            </PaymentDetailsColumn>
+            <PaymentDetailsColumn>
+              <PaymentDetailTitle>FAVORECIDO</PaymentDetailTitle>
+              <PaymentDetail> {offer.nome_favorecido}</PaymentDetail>
+              <PaymentDetailTitle>CNPJ </PaymentDetailTitle>
+              <PaymentDetail>{offer.cnpj}</PaymentDetail>
+            </PaymentDetailsColumn>
+          </PaymentDetailsContainer>
+        )}
+      </PaymentContent>
+      <ChangePaymentMethod onClick={handlePaymentChange}>
+        MUDAR FORMA DE PAGAMENTO
+      </ChangePaymentMethod>
     </PaymentContainer>
   );
 };

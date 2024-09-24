@@ -6,7 +6,6 @@ import logoImage from '../assets/avatar-padrao.png';
 const OfferContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
   padding: 20px;
   border-radius: 8px;
   background-color: #f9f9f9;
