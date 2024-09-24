@@ -1,7 +1,27 @@
 import styled from 'styled-components';
 import { Offer } from '../services/api';
-import Image from 'next/image';
-import logoImage from '../assets/avatar-padrao.png';
+import Image, { StaticImageData } from 'next/image';
+import logoImage1 from '../assets/logoImage1.png';
+import logoImage2 from '../assets/logoImage2.jpg';
+import logoImage3 from '../assets/logoImage3.jpg';
+import logoImage4 from '../assets/logoImage4.png';
+
+type OfferNames =
+  | 'Mima Jornada Alimentar'
+  | 'Pet Delícia'
+  | 'Green Ventures'
+  | 'Tech Innovate';
+
+const offerImages: Record<string, StaticImageData> = {
+  'Mima Jornada Alimentar': logoImage1,
+  'Pet Delícia': logoImage2,
+  'Green Ventures': logoImage3,
+  'Tech Innovate': logoImage4
+};
+
+interface OfferDetailProps {
+  offer: Offer;
+}
 
 const OfferContainer = styled.div`
   display: flex;
@@ -16,7 +36,6 @@ const OfferContainer = styled.div`
     align-items: center;
   }
 `;
-
 const OfferDetails = styled.div`
   flex: 1;
   margin-left: 20px;
@@ -126,9 +145,12 @@ export const OfferDetail: React.FC<OfferDetailProps> = ({ offer }) => {
     return `${names[1]} ${names[0]}`; // Retorna os dois primeiros nomes invertidos
   };
 
+  // Obtenha a imagem correspondente à oferta
+  const offerImage = offerImages[offer.nome_oferta as OfferNames];
+
   return (
     <OfferContainer>
-      <Image src={logoImage} alt="Avatar" width={125} height={65} />
+      <Image src={offerImage} alt="Avatar" width={125} height={100} />
       <OfferDetails>
         <OfferTitle>Você está Quase lá!</OfferTitle>
         <OfferName>{offer.nome_oferta}</OfferName>
