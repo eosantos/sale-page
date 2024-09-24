@@ -33,9 +33,9 @@ const MinimizeIcon = styled.div`
 const PaymentContent = styled.div`
   padding: 20px;
   display: flex;
-  justify-content: space-around;
   flex-wrap: wrap;
   font-weight: 600;
+  justify-content: space-around;
 
   @media (max-width: 1024px) {
     justify-content: center;
@@ -46,6 +46,45 @@ const QRCodeContainer = styled.div`
   text-align: center;
   display: grid;
   justify-items: center;
+`;
+
+const TedDetailContainer = styled.div`
+  width: 350px;
+  display: grid;
+  border-radius: 10px;
+  justify-items: start;
+  background-color: #fff;
+  padding: 20px;
+
+  @media (max-width: 1245px) {
+    margin-bottom: 20px;
+  }
+`;
+
+const HighlightedText = styled.span`
+  font-weight: bold;
+  color: #015047;
+`;
+
+const UnderlinedText = styled(HighlightedText)`
+  text-decoration: underline;
+`;
+
+const Title = styled.p`
+  margin: 0;
+  font-weight: 500;
+`;
+
+const Subtopic = styled.p`
+  margin: 0;
+  padding-left: 20px;
+  font-size: 13px;
+  font-weight: 500;
+`;
+
+const Recommendation = styled.p`
+  margin: 0;
+  font-weight: 500;
 `;
 
 const CopyButton = styled.button<{ $copied: boolean }>`
@@ -174,22 +213,43 @@ export const PaymentInfo: React.FC<PaymentInfoProps> = ({ offer }) => {
             </PaymentDetailsContainer>
           </>
         ) : (
-          <PaymentDetailsContainer>
-            <PaymentDetailsColumn>
-              <PaymentDetailTitle>BANCO</PaymentDetailTitle>
-              <PaymentDetail>{offer.banco}</PaymentDetail>
-              <PaymentDetailTitle>CONTA CORRENTE</PaymentDetailTitle>
-              <PaymentDetail>{offer.numero_conta_corrente}</PaymentDetail>
-              <PaymentDetailTitle>AGÊNCIA</PaymentDetailTitle>
-              <PaymentDetail>{offer.agencia}</PaymentDetail>
-            </PaymentDetailsColumn>
-            <PaymentDetailsColumn>
-              <PaymentDetailTitle>FAVORECIDO</PaymentDetailTitle>
-              <PaymentDetail>{offer.nome_favorecido}</PaymentDetail>
-              <PaymentDetailTitle>CNPJ</PaymentDetailTitle>
-              <PaymentDetail>{offer.cnpj}</PaymentDetail>
-            </PaymentDetailsColumn>
-          </PaymentDetailsContainer>
+          <>
+            <TedDetailContainer>
+              {/* Parte 1 */}
+              <Title>
+                TEDs são válidos mas{' '}
+                <HighlightedText>
+                  possuem desvantagens em relação a Chave PIX.{' '}
+                </HighlightedText>
+                Sendo essas:
+              </Title>
+
+              <Subtopic>• Serão cobradas taxas pela transação</Subtopic>
+              <Subtopic>• Tempo para concluir o pagamento será maior</Subtopic>
+
+              <Recommendation>
+                Por esses motivos, recomendamos que utilize a
+                <UnderlinedText> CHAVE PIX </UnderlinedText> como método de
+                pagamento.
+              </Recommendation>
+            </TedDetailContainer>
+            <PaymentDetailsContainer>
+              <PaymentDetailsColumn>
+                <PaymentDetailTitle>BANCO</PaymentDetailTitle>
+                <PaymentDetail>{offer.banco}</PaymentDetail>
+                <PaymentDetailTitle>CONTA CORRENTE</PaymentDetailTitle>
+                <PaymentDetail>{offer.numero_conta_corrente}</PaymentDetail>
+                <PaymentDetailTitle>AGÊNCIA</PaymentDetailTitle>
+                <PaymentDetail>{offer.agencia}</PaymentDetail>
+              </PaymentDetailsColumn>
+              <PaymentDetailsColumn>
+                <PaymentDetailTitle>FAVORECIDO</PaymentDetailTitle>
+                <PaymentDetail>{offer.nome_favorecido}</PaymentDetail>
+                <PaymentDetailTitle>CNPJ</PaymentDetailTitle>
+                <PaymentDetail>{offer.cnpj}</PaymentDetail>
+              </PaymentDetailsColumn>
+            </PaymentDetailsContainer>
+          </>
         )}
       </PaymentContent>
       <ChangePaymentMethod onClick={handlePaymentChange}>
