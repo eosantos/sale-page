@@ -20,7 +20,7 @@ de cada oferta e faça o upload dos comprovantes de pagamento.
 
 ## Estrutura
 
-    Ecommerce-React-App
+    Sale-Page
     ├── src                            (Diretório principal dos arquivos do projeto)
     │   ├── assets                     (Recursos de folhas de estilo, scripts, fontes e imagens)
     │   ├── components                 (Componentes que não possuem estados, são chamados de dummy components)
