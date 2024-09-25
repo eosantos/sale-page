@@ -12,7 +12,7 @@ de cada oferta e faça o upload dos comprovantes de pagamento.
 <hr>
 <div align="center">
 	<img width="140" margin-right="30px" src="src/app/assets/to_readme/Tela_001.png">	
-	<img width="140" src="src/app/assets/to_readme/Tela_002.png">
+	<img width="240" src="src/app/assets/to_readme/Tela_002.png">
 	<br>
 	<img width="590" src="src/app/assets/to_readme/Tela_003.png">
 </div>
@@ -83,6 +83,8 @@ NEXT_PUBLIC_API_URL=https://66d62a1ef5859a704268886b.mockapi.io/api/v1/oferta
 ````
 
 ### Deploy
+
+Acesse o site aqui
 
 - [Sale Page](https://sale-page-pied.vercel.app/)
 
