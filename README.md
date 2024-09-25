@@ -82,6 +82,9 @@ Crie um arquivo .env.local na raiz do projeto e adicione a chave.
 NEXT_PUBLIC_API_URL=https://66d62a1ef5859a704268886b.mockapi.io/api/v1/oferta
 ````
 
+### Deploy
+
+- [Sale Page](https://sale-page-pied.vercel.app/)
 
 ### Commit
 
