@@ -41,6 +41,8 @@ de cada oferta e faça o upload dos comprovantes de pagamento.
 
 - [Git](https://git-scm.com/doc)
 
+- [Vercel](https://vercel.com/docs)
+
 ### Montagem do ambiente de desenvolvimento
 
 O primeiro passo é clonar o projeto utilizando o método HTTPS ou SSH.
