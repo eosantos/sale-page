@@ -25,7 +25,7 @@ de cada oferta e faça o upload dos comprovantes de pagamento.
     ├── src                            (Diretório principal dos arquivos do projeto)
     │   ├── assets                     (Recursos de folhas de estilo, scripts, fontes e imagens)
     │   ├── components                 (Componentes que não possuem estados, são chamados de dummy components)
-    │   ├── services                    (Utilizado para transferir dados através de protocolos de comunicação para diferentes plataformas)
+    │   ├── services                   (Utilizado para transferir dados através de protocolos de comunicação para diferentes plataformas)
     ├── README.md                      (Breve definição/Documentação)
     └── ...                            (Outros arquivos de configuração)
 
