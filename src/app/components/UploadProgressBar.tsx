@@ -7,6 +7,7 @@ const StyledUploadProgressBarContainer = styled.div`
   background-color: #f3f3f3;
   border-radius: 5px;
   margin: 10px auto;
+  background-color: transparent;
 `;
 
 const StyledUploadProgressBar = styled.div<{ progress: number }>`

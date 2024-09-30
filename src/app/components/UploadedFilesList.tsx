@@ -5,6 +5,7 @@ const StyledUploadedFilesList = styled.ul`
   list-style-type: none;
   padding: 0;
   margin: 20px 0;
+  color: #015047;
 `;
 
 interface UploadedFilesListProps {

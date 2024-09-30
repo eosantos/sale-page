@@ -1,3 +1,4 @@
+import React from 'react';
 import UploadContainer from './UploadContainer';
 import UploadButton from './UploadButton';
 import UploadIconWrapper from './UploadIconWrapper';
@@ -14,7 +15,6 @@ import ErrorPopup from './ErrorPopup';
 import { HiArrowDownTray } from 'react-icons/hi2';
 import { GiPaperClip } from 'react-icons/gi';
 import useUploadHandlers from '../hooks/useUploadHandlers';
-
 import styled from 'styled-components';
 
 const UploadTitleContainer = styled.div`
@@ -36,6 +36,31 @@ const TextContainer = styled.div`
 const UploadTitle = styled.h1`
   font-size: 18px;
   margin-bottom: 5px;
+`;
+
+const FileName = styled.span`
+  font-size: 12px
+  display: flex;
+  color: #015047;
+  font-weight: 600;
+`;
+
+const ContainerProgress = styled.span`
+  display: flex;
+  align-items: center;
+`;
+
+const FileProgress = styled.span`
+  font-size: 12px;
+  color: #229321;
+  font-weight: 600;
+  margin-right: 0px;
+`;
+
+const UploadTitleEnviados = styled.h1`
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #015047;
 `;
 
 const UploadSubtitle = styled.h1`
@@ -113,46 +138,44 @@ const UploadArea: React.FC = () => {
           {loadingFiles.length > 0 ? (
             loadingFiles.map((file) => (
               <div key={file.id}>
-                <p>{file.file.name}</p>
-                <UploadProgressBarContainer>
-                  <UploadProgressBar progress={uploadProgress[file.id]} />
-                </UploadProgressBarContainer>
-                <p>{uploadProgress[file.id]}%</p>
+                <FileName>{file.file.name}</FileName>
+                <ContainerProgress>
+                  <FileProgress>{uploadProgress[file.id]}%</FileProgress>
+                  <UploadProgressBarContainer>
+                    <UploadProgressBar progress={uploadProgress[file.id]} />
+                  </UploadProgressBarContainer>
+                </ContainerProgress>
               </div>
             ))
           ) : (
-            <></>
-          )}
+            <>
+              {uploadedFiles.length === 0 && (
+                <div>
+                  {isDragging ? (
+                    <>
+                      <UploadIconWrapper>
+                        <HiArrowDownTray />
+                      </UploadIconWrapper>
+                      <UploadDragMessage isDragging={isDragging}>
+                        SOLTE AQUI SEUS ARQUIVOS
+                      </UploadDragMessage>
+                    </>
+                  ) : (
+                    <UploadTitleContainer>
+                      <UploadIconWrapper>
+                        <HiArrowDownTray />
+                      </UploadIconWrapper>
 
-          {uploadedFiles.length === 0 && loadingFiles.length === 0 && (
-            <div>
-              {isDragging ? (
-                <>
-                  <UploadIconWrapper>
-                    <HiArrowDownTray />
-                  </UploadIconWrapper>
-                  <UploadDragMessage isDragging={isDragging}>
-                    SOLTE AQUI SEUS ARQUIVOS
-                  </UploadDragMessage>
-                </>
-              ) : (
-                <>
-                  <UploadTitleContainer>
-                    <UploadIconWrapper>
-                      <HiArrowDownTray />
-                    </UploadIconWrapper>
-
-                    <TextContainer>
-                      <UploadTitle>
-                        Anexe aqui seu(s) comprovante(s) de pagamento.
-                      </UploadTitle>
-                      <UploadSubtitle>
-                        Arquivos permitidos: PDF, JPEG ou PNG - Max 25mb
-                      </UploadSubtitle>
-                    </TextContainer>
-                  </UploadTitleContainer>
-
-                  {/* Botão de adicionar arquivo */}
+                      <TextContainer>
+                        <UploadTitle>
+                          Anexe aqui seu(s) comprovante(s) de pagamento.
+                        </UploadTitle>
+                        <UploadSubtitle>
+                          Arquivos permitidos: PDF, JPEG ou PNG - Max 25mb
+                        </UploadSubtitle>
+                      </TextContainer>
+                    </UploadTitleContainer>
+                  )}
                   {!isDragging && (
                     <ButtonContainer>
                       <SelectFileButton htmlFor="file-upload">
@@ -163,40 +186,44 @@ const UploadArea: React.FC = () => {
                       </SelectFileButton>
                     </ButtonContainer>
                   )}
+                </div>
+              )}
+
+              {uploadedFiles.length > 0 && (
+                <>
+                  <UploadTitleEnviados>ARQUIVOS ENVIADOS</UploadTitleEnviados>
+                  <UploadSubtitle>
+                    Arquivos permitidos: PDF, JPEG ou PNG - Max 25mb
+                  </UploadSubtitle>
+                  <UploadedFilesList>
+                    {uploadedFiles.map((file) => (
+                      <li key={file.id}>
+                        <FileName>{file.file.name}</FileName>
+                        <UploadDeleteButton
+                          onClick={() =>
+                            setUploadedFiles((prev) =>
+                              prev.filter((f) => f.id !== file.id)
+                            )
+                          }
+                        >
+                          X
+                        </UploadDeleteButton>
+                      </li>
+                    ))}
+                  </UploadedFilesList>
+                  <UploadButton>
+                    <UploadSelectFileButton htmlFor="file-upload">
+                      ADICIONAR ARQUIVO
+                      <GiPaperClipIcon>
+                        <GiPaperClip />
+                      </GiPaperClipIcon>
+                    </UploadSelectFileButton>
+                    <UploadFinishButton onClick={handleFinishUpload}>
+                      FINALIZAR ENVIO
+                    </UploadFinishButton>
+                  </UploadButton>
                 </>
               )}
-            </div>
-          )}
-
-          {uploadedFiles.length > 0 && (
-            <>
-              <UploadedFilesList>
-                {uploadedFiles.map((file) => (
-                  <li key={file.id}>
-                    {file.file.name}
-                    <UploadDeleteButton
-                      onClick={() =>
-                        setUploadedFiles((prev) =>
-                          prev.filter((f) => f.id !== file.id)
-                        )
-                      }
-                    >
-                      X
-                    </UploadDeleteButton>
-                  </li>
-                ))}
-              </UploadedFilesList>
-              <UploadButton>
-                <UploadSelectFileButton htmlFor="file-upload">
-                  ADICIONAR ARQUIVO
-                  <GiPaperClipIcon>
-                    <GiPaperClip />
-                  </GiPaperClipIcon>
-                </UploadSelectFileButton>
-                <UploadFinishButton onClick={handleFinishUpload}>
-                  FINALIZAR ENVIO
-                </UploadFinishButton>
-              </UploadButton>
             </>
           )}
           <input

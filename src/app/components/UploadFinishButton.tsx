@@ -9,6 +9,7 @@ const StyledUploadFinishButton = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 15px;
 
   &:hover {
     background-color: #015049;
