@@ -28,6 +28,10 @@ const TextMail = styled.h3`
   width: 100%;
   color: #015047;
   margin: 15px 0 20px 15px;
+
+  @media (max-width: 530px) {
+    font-size: 16px;
+  }
 `;
 
 const RectangleContainer = styled.div`
@@ -35,8 +39,9 @@ const RectangleContainer = styled.div`
   width: 100%;
   gap: 20px;
 
-  @media (max-width: 780px) {
-    display: grid;
+  @media (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
     grid-template-columns: repeat(2, 1fr);
   }
 `;
@@ -52,6 +57,14 @@ const RectangleChat = styled.div`
   align-items: start;
   color: white;
   padding: 10px;
+
+  @media (max-width: 1024px) {
+    padding: 30px 0 10px 30px;
+  }
+
+  @media (max-width: 424px) {
+    padding: 15px 0 5px 0;
+  }
 `;
 
 const RectangleMail = styled.div`
@@ -66,6 +79,14 @@ const RectangleMail = styled.div`
   align-items: start;
   color: white;
   padding: 10px;
+
+  @media (max-width: 1024px) {
+    padding: 30px 0 10px 30px;
+  }
+
+  @media (max-width: 424px) {
+    padding: 15px 0 5px 0;
+  }
 `;
 
 const Button = styled.button`

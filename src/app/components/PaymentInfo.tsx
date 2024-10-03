@@ -18,10 +18,11 @@ const PaymentContent = styled.div`
   display: flex;
   justify-content: flex-start;
   gap: 20px;
-  margin: 30px 0 0 35px;
+  margin: 30px 0 0 0;
 
   @media (max-width: 1024px) {
     flex-direction: column;
+    margin-top: 30px;
   }
 `;
 

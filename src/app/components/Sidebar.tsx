@@ -32,6 +32,12 @@ const UploadTitle = styled.h3`
   text-align: left;
   width: 100%;
   color: #015047;
+
+  @media (max-width: 335px) {
+    text-align: center;
+    margin: 0px;
+    font-size: 16px;
+  }
 `;
 
 const CloseButton = styled.button`
@@ -117,11 +123,12 @@ const NotificationContainer = styled.div`
 
 const Content = styled.main`
   margin-left: 250px;
-  padding: 80px 20px;
+  padding: 80px;
   background-color: #f9f9f9;
 
   @media (max-width: 780px) {
     margin-left: 0;
+    padding: 10px;
   }
 `;
 

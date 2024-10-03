@@ -12,6 +12,10 @@ const StyledUploadContainer = styled.div<{ $isDragging: boolean }>`
   transition:
     background-color 0.3s,
     border-color 0.3s;
+
+  @media (max-width: 775px) {
+    margin: 10px;
+  }
 `;
 
 interface UploadContainerProps {
