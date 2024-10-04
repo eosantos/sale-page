@@ -11,10 +11,10 @@ import {
 import UploadedFilesList from './UploadedFilesList';
 import UploadDeleteButton from './UploadDeleteButton';
 import UploadDragMessage from './UploadDragMessage';
-import ErrorPopup from './ErrorPopup';
+import ErrorPopup from './../ErrorPopup';
 import { HiArrowDownTray } from 'react-icons/hi2';
 import { GiPaperClip } from 'react-icons/gi';
-import useUploadHandlers from '../hooks/useUploadHandlers';
+import useUploadHandlers from '../../hooks/useUploadHandlers';
 import styled from 'styled-components';
 
 const UploadTitleContainer = styled.div`

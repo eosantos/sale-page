@@ -1,8 +1,7 @@
-// Content.tsx
 import React from 'react';
 import { Offer } from '../services/api';
-import { OfferDetail } from '../components/OfferDetail';
-import { PaymentInfo } from '../components/PaymentInfo';
+import { OfferDetail } from '../components/Offer/OfferDetail';
+import { PaymentInfo } from '../components/Payment/PaymentInfo';
 
 interface ContentProps {
   offers: Offer[];

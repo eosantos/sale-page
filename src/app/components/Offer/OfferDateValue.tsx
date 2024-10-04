@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { Offer } from '../services/api';
+import { Offer } from '../../services/api';
 
-interface PaymentInfoProps {
+interface OfferDateValueProps {
   offer: Offer;
 }
 
-const PaymentInfoContainer = styled.div`
+const OfferDateValueContainer = styled.div`
   display: flex;
   gap: 0px;
 
@@ -60,7 +60,7 @@ const OfferInfoTitle = styled.p`
   font-size: 12px;
 `;
 
-const PaymentInfo: React.FC<PaymentInfoProps> = ({ offer }) => {
+const OfferDateValue: React.FC<OfferDateValueProps> = ({ offer }) => {
   const formattedValue = (valor: number) => {
     return valor.toLocaleString('pt-BR', {
       style: 'currency',
@@ -69,7 +69,7 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({ offer }) => {
   };
 
   return (
-    <PaymentInfoContainer>
+    <OfferDateValueContainer>
       <ValidityBox>
         <OfferInfoTitle>PAGAMENTO VÁLIDO ATÉ:</OfferInfoTitle>
         <OfferInfo>{offer.validade}</OfferInfo>
@@ -78,8 +78,8 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({ offer }) => {
         <OfferInfoTitle>VALOR:</OfferInfoTitle>
         <OfferInfo>{formattedValue(offer.valor_a_ser_liquidado)}</OfferInfo>
       </ValueBox>
-    </PaymentInfoContainer>
+    </OfferDateValueContainer>
   );
 };
 
-export default PaymentInfo;
+export default OfferDateValue;

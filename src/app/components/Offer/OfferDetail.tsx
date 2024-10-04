@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Offer } from '../services/api';
+import { Offer } from '../../services/api';
 import OfferImage from './OfferImage';
 import OfferHeader from './OfferHeader';
 import OfferDescription from './OfferDescription';

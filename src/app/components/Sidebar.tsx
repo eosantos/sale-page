@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Header } from './Header';
-import { OfferDetail } from '../components/OfferDetail';
-import { PaymentInfo } from '../components/PaymentInfo';
+import { OfferDetail } from '../components/Offer/OfferDetail';
+import { PaymentInfo } from '../components/Payment/PaymentInfo';
 import { ImportantConsiderations } from '../components/ImportantConsiderations';
-import UploadArea from '../components/UploadArea';
+import UploadArea from '../components/Upload/UploadArea';
 import { fetchOffers, Offer } from '../services/api';
 import { FaCoins, FaUser, FaArrowRightArrowLeft } from 'react-icons/fa6';
 import Footer from '../components/Footer';

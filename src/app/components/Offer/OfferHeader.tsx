@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Offer } from '../services/api';
+import { Offer } from '../../services/api';
 
 interface OfferHeaderProps {
   offer: Offer;

@@ -1,8 +1,8 @@
 import Image, { StaticImageData } from 'next/image';
-import logoImage1 from '../assets/logoImage1.png';
-import logoImage2 from '../assets/logoImage2.jpg';
-import logoImage3 from '../assets/logoImage3.jpg';
-import logoImage4 from '../assets/logoImage4.png';
+import logoImage1 from '../../assets/logoImage1.png';
+import logoImage2 from '../../assets/logoImage2.jpg';
+import logoImage3 from '../../assets/logoImage3.jpg';
+import logoImage4 from '../../assets/logoImage4.png';
 
 type OfferNames =
   | 'Mima Jornada Alimentar'

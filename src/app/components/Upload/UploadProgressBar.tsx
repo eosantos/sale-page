@@ -10,8 +10,8 @@ const StyledUploadProgressBarContainer = styled.div`
   background-color: transparent;
 `;
 
-const StyledUploadProgressBar = styled.div<{ progress: number }>`
-  width: ${({ progress }) => progress}%;
+const StyledUploadProgressBar = styled.div<{ $progress: number }>`
+  width: ${({ $progress }) => $progress}%;
   height: 10px;
   background-color: #015047;
   border-radius: 5px;
@@ -29,7 +29,7 @@ export const UploadProgressBar: React.FC<UploadProgressBarProps> = ({
 }) => {
   return (
     <StyledUploadProgressBarContainer>
-      <StyledUploadProgressBar progress={progress} />
+      <StyledUploadProgressBar $progress={progress} />
     </StyledUploadProgressBarContainer>
   );
 };

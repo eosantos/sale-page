@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Offer } from '../services/api';
+import { Offer } from '../../services/api';
 import PaymentHeader from './PaymentHeader';
 import PaymentQRCode from './PaymentQRCode';
 import PaymentDetails from './PaymentDetails';

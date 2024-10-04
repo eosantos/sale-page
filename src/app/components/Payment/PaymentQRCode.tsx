@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Offer } from '../services/api';
-import QRCodeGenerator from './QRCodeGenerator';
+import { Offer } from '../../services/api';
+import QRCodeGenerator from './../QRCodeGenerator';
 
 const QRCodeContainer = styled.div`
   text-align: center;
